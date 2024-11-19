@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@google-cloud/dialogflow": "^6.8.0",
+    "actions-on-google": "^2.14.0",
+    "axios": "^1.7.7",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dialogflow": "^1.2.0",
+    "dialogflow-fulfillment": "^0.5.0",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "json2csv": "^6.0.0-alpha.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.6.3",
+    "nodemon": "^3.1.7",
+    "uuid": "^10.0.0"
+  },
+  "scripts": {
+    "start": "nodemon server.js"
+  }
+}
