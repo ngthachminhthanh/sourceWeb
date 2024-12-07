@@ -74,6 +74,22 @@ const OrderManagement = () => {
 		}
 	};
 
+	const handleConfirm = async (orderId) => {
+		try {
+			const response = await axios.patch(`http://localhost:5000/api/admin/orders/${orderId}`, { status: "shipping" });
+			if (response.status === 200) {
+				setOrders(prevOrders => 
+					prevOrders.map(order => 
+						order._id === orderId ? { ...order, status: "shipping" } : order
+					)
+				);
+			}
+		} catch (error) {
+			console.error('Error updating order status:', error);
+			setError('Không thể cập nhật trạng thái đơn hàng. Vui lòng thử lại sau.');
+		}
+	}
+
 	const indexOfLastOrder = currentPage * ordersPerPage;
 	const indexOfFirstOrder = indexOfLastOrder - ordersPerPage;
 	const currentOrders = filteredOrders.slice(indexOfFirstOrder, indexOfLastOrder);
@@ -139,6 +155,7 @@ const OrderManagement = () => {
 							<th className="border p-2">Chi tiết đơn hàng</th>
 							<th className="border p-2">Tổng thanh toán</th>
 							<th className="border p-2">Trạng thái đơn hàng</th>
+							<th className="border p-2">Thao tác</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -169,6 +186,17 @@ const OrderManagement = () => {
 									<option value="delivered">Đã giao</option>
 									<option value="cancelled">Đã hủy</option>
 								</select>
+							</td>
+							{/* <td className="border p-2 text-center">
+								{getStatusName(order.status)}
+							</td> */}
+							<td className="border p-2 text-center">
+								<button 
+									onClick={() => handleConfirm(order._id)}
+									className='rounded-lg bg-green-400 hover:bg-green-500 p-2 transition duration-300'
+								>
+									Xác nhận
+								</button>
 							</td>
 						</tr>
 						))}
